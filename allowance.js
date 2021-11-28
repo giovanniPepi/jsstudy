@@ -11,7 +11,7 @@ checkBox.addEventListener('change', function() {
 
 /*Update allowance value based on checkbox change */
 function updateAllowance() {
-    if (taskDone === true) {
+    if (taskDone) {
         var childAllowance = 13.99; 
     } else {
         var childAllowance = 5.99;
