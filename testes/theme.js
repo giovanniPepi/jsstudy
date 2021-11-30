@@ -9,5 +9,28 @@ function update(bgColor, textColor) {
 }
 
 select.onchange = function () {
-    (select.value === 'black' ) ? update ('black', 'white') : update ('white', 'black')
+    const choice = select.value;
+
+    switch(choice) {
+        case 'white':
+            update('white', 'black');
+            break;
+
+        case 'black':
+            update('black', 'white');
+            break;
+
+        case "purple":
+            update ('purple', 'white');
+            break;
+
+        case "yellow":
+            update ('yellow', 'grey');
+            break;
+        
+        case "green":
+            update('green', 'orange');
+            break;
+
+    }
 }
