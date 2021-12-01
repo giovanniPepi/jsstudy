@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Check the console below</p>
+    <script src="num.js"></script>
+
+    <script>
+        let numCorrect = 0; 
+        let numChecked = 0; 
+
+        const result = numberChecker(); 
+        console.log(`You entered: ${number}, and got result: ${result}`);
+        console.log("\nTest resuts: ");
+
+        function checkNumberChecker (num) {
+            number = num; 
+            const result = numberChecker();
+            if ((result === true && number >= 10) || (result === false && number <10)) {
+                numCorrect++;
+                console.log(`If I enter ${number}, the result is ${result}. This is correct!`);
+            } else {
+                console.error (`If I enter ${number}, the result is ${result}, when I should have gotten ${number >=10} intested.`);
+            }
+            numChecked++;
+            console.log("\n");
+        }
+
+        checkNumberChecker(2)
+		checkNumberChecker(12)
+		checkNumberChecker(6)
+		checkNumberChecker(10)
+		checkNumberChecker(9)
+
+    if (numCorrect === numChecked) {
+        console.log("You've passed all tests, continue to the next lesson!");
+    } else {
+        console.log (`You've failed ${numChecked - numCorrect} out of ${numChecked}, please try again.`);
+    }
+    </script>
+    
+</body>
+</html>
