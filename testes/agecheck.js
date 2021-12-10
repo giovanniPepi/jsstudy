@@ -2,7 +2,7 @@ function checkAge(age) {
     if (age >= 18) {
         return true;
     } else {
-        return confirm('Do you have your parents permission to enter this site?');
+        return confirm ('Do you have your parents permission to enter this site?');
     }
 }
 
@@ -13,3 +13,13 @@ if (checkAge(age)) {
 } else {
     alert('Acess denied.');
 }
+
+function showMovie(age) {
+    if (!checkAge(age)) {
+        return;
+    }
+    
+    alert("Showing you the movie...");
+}
+
+showMovie(age);
