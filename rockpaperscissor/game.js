@@ -1,31 +1,30 @@
 function playGame () {
-    const usrChoice = prompt('Choose Rock, Paper or Scissors').toLowerCase();
-    const cpuChoice = cpuPlay();
+    const usrTurn = prompt('Choose Rock, Paper or Scissors').toLowerCase();
+    const pcTurn = pcPlay();
 
-    function cpuPlay() {
-        const plays = ['rock', 'paper', 'scissors'];
-        const cpuRand = Math.floor(Math.random() * plays.length);
-        return (plays[cpuRand]);   
+    function pcPlay() {
+        const turn = ['rock', 'paper', 'scissors'];
+        const pcRand = Math.floor(Math.random() * turn.length);
+        return (turn[pcRand]);   
     } 
- 
-    function playRound (usrChoice, cpuChoice) {
-        if ((usrChoice != 'rock') && (usrChoice != 'paper') && (usrChoice != 'scissors') ){
-            return(`Please type: 'Rock', 'Paper' or 'Scissors' to play.`);
-        } else if (usrChoice  == cpuChoice) {
+    function playTurn (usrTurn, pcTurn) {
+        if ((usrTurn != 'rock') && (usrTurn != 'paper') && 
+        (usrTurn != 'scissors')) {
+            return(`Please type 'Rock', 'Paper' or 'Scissors' to play.`);
+        } else if (usrTurn  == pcTurn) {
             return('Draw!')
-        } else if (cpuChoice == 'scissors' && usrChoice  == 'paper') {
-            return(`You lose! ${cpuChoice} beats ${usrChoice}.`);
-        } else if (cpuChoice == 'paper' && usrChoice  == 'rock') {
-            return(`You lose! ${cpuChoice} beats ${usrChoice}.`);
-        } else if (cpuChoice == 'rock' && usrChoice  == 'scissors') {
-            return(`You lose! ${cpuChoice} beats ${usrChoice}.`);
+        } else if (pcTurn == 'scissors' && usrTurn  == 'paper') {
+            return(`You lose! ${pcTurn} beats ${usrTurn}.`);
+        } else if (pcTurn == 'paper' && usrTurn  == 'rock') {
+            return(`You lose! ${pcTurn} beats ${usrTurn}.`);
+        } else if (pcTurn == 'rock' && usrTurn  == 'scissors') {
+            return(`You lose! ${pcTurn} beats ${usrTurn}.`);
         } else {
-            return(`${usrChoice} beats ${cpuChoice}. You win!`)
+            return(`${usrTurn} beats ${pcTurn}. You win!`)
         }
     }
-console.log(playRound(usrChoice, cpuChoice));
+console.log(playTurn(usrTurn, pcTurn));
 }
-
 playGame();
 playGame();
 playGame();
