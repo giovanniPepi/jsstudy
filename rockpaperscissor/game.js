@@ -1,36 +1,34 @@
-function game () {
+function playGame () {
+    const usrChoice = prompt('Choose Rock, Paper or Scissors').toLowerCase();
+    const cpuChoice = cpuPlay();
 
-    const playerSelection = prompt('Choose Rock, Paper or Scissors').toLowerCase();
-    const computerSelection = computerPlay();
-
-    function computerPlay() {
+    function cpuPlay() {
         const plays = ['rock', 'paper', 'scissors'];
-        const computerRound = Math.floor(Math.random() * plays.length);
-        return (plays[computerRound]);   
+        const cpuRand = Math.floor(Math.random() * plays.length);
+        return (plays[cpuRand]);   
     } 
-
-    function playRound (playerSelection, computerSelection) {
-        if ((playerSelection != 'rock') && (playerSelection != 'paper') && (playerSelection != 'scissors') ){
+ 
+    function playRound (usrChoice, cpuChoice) {
+        if ((usrChoice != 'rock') && (usrChoice != 'paper') && (usrChoice != 'scissors') ){
             return(`Please type: 'Rock', 'Paper' or 'Scissors' to play.`);
-        } else if (playerSelection  == computerSelection) {
+        } else if (usrChoice  == cpuChoice) {
             return('Draw!')
-        } else if (computerSelection == 'scissors' && playerSelection  == 'paper') {
-            return(`You lose! ${computerSelection} beats ${playerSelection}.`);
-        } else if (computerSelection == 'paper' && playerSelection  == 'rock') {
-            return(`You lose! ${computerSelection} beats ${playerSelection}.`);
-        } else if (computerSelection == 'rock' && playerSelection  == 'scissors') {
-            return(`You lose! ${computerSelection} beats ${playerSelection}.`);
+        } else if (cpuChoice == 'scissors' && usrChoice  == 'paper') {
+            return(`You lose! ${cpuChoice} beats ${usrChoice}.`);
+        } else if (cpuChoice == 'paper' && usrChoice  == 'rock') {
+            return(`You lose! ${cpuChoice} beats ${usrChoice}.`);
+        } else if (cpuChoice == 'rock' && usrChoice  == 'scissors') {
+            return(`You lose! ${cpuChoice} beats ${usrChoice}.`);
         } else {
-            return(`${playerSelection} beats ${computerSelection}. You win!`)
+            return(`${usrChoice} beats ${cpuChoice}. You win!`)
         }
+    }
+console.log(playRound(usrChoice, cpuChoice));
 }
 
-console.log(playRound(playerSelection, computerSelection));
+playGame();
+playGame();
+playGame();
+playGame();
+playGame();
 
-}
-
-game();
-game();
-game();
-game();
-game();
