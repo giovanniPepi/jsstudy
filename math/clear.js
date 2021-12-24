@@ -1,2 +1,6 @@
 const clearBtn = document.querySelector('#clear'); 
-clearBtn.addEventListener('click', () => result.textContent = '');
+clearBtn.addEventListener('click', () => numberResult.textContent = '');
+clearBtn.addEventListener('click', () => slideContainer.textContent = '');
+clearBtn.addEventListener('click', () => admitted.textContent = '');
+clearBtn.addEventListener('click', () => refused.textContent = '');
+clearBtn.addEventListener('click', () => output.textContent = '');
