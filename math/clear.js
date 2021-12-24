@@ -7,4 +7,4 @@ clearBtn.addEventListener('click', () => output.textContent = '');
 clearBtn.addEventListener('click', () => output.textContent = '');
 clearBtn.addEventListener('click', () => section.textContent = '');
 clearBtn.addEventListener('click', () => catResult.textContent = '');
-clearBtn.addEventListener('click', () => loop3.textContent = '');
+clearBtn.addEventListener('click', () => primeResult.textContent = '');
