@@ -18,8 +18,7 @@ let b = 0;
 while (b <= phonebook.length-1) {     
     if (phonebook[b].name === name1) {
         let phone = phonebook[b].number;
-        para3.textContent = `${name1}'s number: ${phone}`;      
-        console.log(phonebook[b].name);  
+        para3.textContent = `${name1}'s number: ${phone}`;       
         break;
     };
     b++;
