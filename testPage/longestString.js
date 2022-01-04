@@ -15,6 +15,6 @@ function longString () {
 
 inptStringBtn.addEventListener('click', function () {
     const inptTxt = inptString.value.split(",");
-    longString(...inptTxt); /* spread operator pass argument as str, otherwise would pass an array */
+    longString(...inptTxt); /* spread operator/ pass argument as str, otherwise would pass an array */
 });
 
