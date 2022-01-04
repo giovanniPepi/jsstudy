@@ -10,7 +10,7 @@ function longString () {
             long = args[i];
         }
     }
-    resultLongString.textContent += long;
+    resultLongString.textContent = long;
 };
 
 inptStringBtn.addEventListener('click', function () {
