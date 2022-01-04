@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page, a page to test!</title>
     <script src="longestString.js" defer></script>
     <script src="clearHTML.js" defer></script>
+    <script src="sumVariadic.js" defer></script>
 </head>
 <body>
     <div>
-        <button id="clearBtn1">Clear</button>
+        <button id="clearBtn">Clear</button>
     </div>
+    <p>Enter strings separated by commas:</p>
     <input type="text" id="longString">
-    <button id="longButton">Return Longest String</button>
+    <button id="longButton">Go!</button>
     <p id ="longStringResult"></p>
+    <p>Enter numbers to sum, separated by commas.</p>
+    <input type="text" id="sum">
+    <button id="sumButton">Go!</button>
+    <p id="sumResult"></p>
 </body>
 </html>
