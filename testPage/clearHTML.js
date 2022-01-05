@@ -6,4 +6,6 @@ clearBtn.addEventListener('click', () => {
     multiplyResult.textContent="";
     sort1Result.textContent="";
     leapYearResult.textContent="";    
+    ctofResult.textContent="";
+    ftocResult.textContent="";
 })
