@@ -16,4 +16,5 @@ leapYearBtn.addEventListener("click", () => {
     if (leapYears(leapYearInpt.value)) {
         leapYearResult.textContent = `Yes ${leapYearInpt.value} IS a leap year!`
     } else leapYearResult.textContent = `${leapYearInpt.value} is NOT a leap year!`
+    document.getElementById("leapYearResult").scrollIntoView();
 });

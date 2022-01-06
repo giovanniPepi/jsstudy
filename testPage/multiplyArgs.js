@@ -16,4 +16,5 @@ multiplyBtn.addEventListener('click', () => {
     const neatInput = input.map(Number);
     //console.log("Without rest function: " + neatInput + ' ' + typeof(neatInput));
     multiplyResult.textContent = multiplyArgs(...neatInput);
+    document.getElementById("multiplyArgsResult").scrollIntoView();
 });

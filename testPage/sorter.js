@@ -11,6 +11,7 @@ sortBtn.addEventListener("click", () => {
     const newInput = sortInpt.value.split(",");
     const neatInput = newInput.map(Number);
     sortResult.textContent = sortRestArgs(...neatInput);
+    document.getElementById("sort1Result").scrollIntoView();
 });
 
 /* restArgs can be sorted because they have properties like real Arrays. 

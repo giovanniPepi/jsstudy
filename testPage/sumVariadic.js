@@ -12,4 +12,5 @@ sumBtn.addEventListener('click', function () {
     const inputNumbers = sumInpt.value.split(",");
     const neatInputNumbers = inputNumbers.map(Number);
     sumResult.textContent = sum(...neatInputNumbers);
+    document.getElementById("sumResult").scrollIntoView();
 });
