@@ -7,12 +7,16 @@
     <title>Rock, Paper, Scissors!</title>
     <link rel="stylesheet" href="styles.css">
     <script src="game.js" defer></script>
+    <script src="clear.js" defer></script>
 
 </head>
 <body>
-    
-    <p id="header"> Use your keyboard to play</p>
-
+    <div class="header">
+        <p id="headerP"> Use your keyboard to play</p>
+        
+    </div>
+    <div class="resultArea">
+    </div>
     <div class="userChoice">
         <div data-key="82" class="keyChoice" id="rock">
             <kbd>R</kbd>
@@ -27,11 +31,12 @@
             <span class ="description">Scissors</span>
         </div>
     </div>
-    <div class="resultArea">
-    </div>
+    
     <br>
     <div class="resultHistoryArea">    
+        <button id ="clear">Clear this mess</button>
         <p id="history"> History:</p>    
     </div>
+    
 </body>
 </html>
