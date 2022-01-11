@@ -1,5 +1,7 @@
 const pcTurn = pcPlay();
 let justPlayed = null;
+const resultArea = document.querySelector(".resultArea")
+const resultHistoryArea = document.querySelector(".resultHistoryArea");
 
 function pcPlay() {
     const turn = ['rock', 'paper', 'scissors'];
@@ -8,7 +10,6 @@ function pcPlay() {
 };
 
 function gamePlay (usrTurn, pcTurn) {
-    console.log(usrTurn, pcTurn, typeof usrTurn, typeof pcTurn);
     if ((usrTurn != 'rock') && (usrTurn != 'paper') && (usrTurn != 'scissors')) {
             return(`Please type 'Rock', 'Paper' or 'Scissors' to play.`);
         } else if (usrTurn  == pcTurn) {
@@ -30,7 +31,8 @@ function playThis (n) {
     if (n.keyCode === justPlayed) return; // avoids CSS stuck when repeated input
     keyChoice.classList.add('playing');
     justPlayed = n.keyCode;
-    console.log(gamePlay(keyChoice.id, pcPlay()));  
+    createResultDiv((gamePlay(keyChoice.id, pcPlay())));     
+    removeResult();    
 };
 
 function removeTransition (n) {
@@ -43,3 +45,32 @@ choices.forEach(choice => choice.addEventListener('transitionend', removeTransit
 
 window.addEventListener('keydown', playThis);
 window.addEventListener('keyup', () => justPlayed = null)
+
+
+function createResultDiv (result) {
+    const resultDiv = document.querySelector('.results')
+
+    if (!resultDiv) {
+        const resultDiv = document.createElement("div");
+        resultDiv.setAttribute("class", "results");  
+        resultDiv.textContent = result;
+        resultArea.appendChild(resultDiv);
+        
+    } else {
+        resultDiv.textContent = result;
+        archiveResult();
+    };
+}
+
+function archiveResult () {
+    const historyDiv = document.createElement("div");
+    const currentResult = document.querySelector('.results').textContent;
+
+    historyDiv.setAttribute("class", "resultHistory");
+    historyDiv.textContent = currentResult;
+    resultHistoryArea.appendChild(historyDiv);    
+}
+
+function removeResult () {
+    currentResult = document.querySelector('.results');
+}
