@@ -1,3 +1,5 @@
+const rockBtn = document.querySelector("#rock");
+
 function playGame () {
     const usrTurn = prompt('Choose Rock, Paper or Scissors').toLowerCase();
     const pcTurn = pcPlay();
@@ -6,8 +8,9 @@ function playGame () {
         const turn = ['rock', 'paper', 'scissors'];
         const pcRand = Math.floor(Math.random() * turn.length);
         return (turn[pcRand]);   
-    } 
-    function playTurn (usrTurn, pcTurn) {
+    };
+
+    function gamePlay (usrTurn, pcTurn) {
         if ((usrTurn != 'rock') && (usrTurn != 'paper') && 
         (usrTurn != 'scissors')) {
             return(`Please type 'Rock', 'Paper' or 'Scissors' to play.`);
@@ -23,11 +26,6 @@ function playGame () {
             return(`${usrTurn} beats ${pcTurn}. You win!`)
         }
     }
-console.log(playTurn(usrTurn, pcTurn));
-}
-playGame();
-playGame();
-playGame();
-playGame();
-playGame();
+    console.log(gamePlay(usrTurn, pcTurn));
+};
 
