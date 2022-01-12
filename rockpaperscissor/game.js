@@ -13,14 +13,19 @@ function gamePlay (usrTurn, pcTurn) {
     if ((usrTurn != 'rock') && (usrTurn != 'paper') && (usrTurn != 'scissors')) {
             return(`Please type 'Rock', 'Paper' or 'Scissors' to play.`);
         } else if (usrTurn  == pcTurn) {
-            return('It\'s a Draw!')
+            writeRound (usrTurn, pcTurn);
+            return('It\'s a Draw!') 
         } else if (pcTurn == 'scissors' && usrTurn  == 'paper') {
+            writeRound (usrTurn, pcTurn);
             return(`Nooo! You have lost, ${usrTurn} lose to ${pcTurn}`);
         } else if (pcTurn == 'paper' && usrTurn  == 'rock') {
+            writeRound (usrTurn, pcTurn);
             return(`You have lost, ${usrTurn} lose to ${pcTurn}`);
         } else if (pcTurn == 'rock' && usrTurn  == 'scissors') {
+            writeRound (usrTurn, pcTurn);
             return(`Nooo! You have lost, ${usrTurn} lose to ${pcTurn}!`);
         } else {
+            writeRound (usrTurn, pcTurn);
             return(`YEAH! You have won, ${usrTurn} beats ${pcTurn}!`)
         }
     };
@@ -32,7 +37,6 @@ function playThis (n) {
     keyChoice.classList.add('playing');
     justPlayed = n.keyCode;
     createResultDiv((gamePlay(keyChoice.id, pcPlay())));     
-    removeResult();    
 };
 
 function removeTransition (n) {
@@ -42,18 +46,16 @@ function removeTransition (n) {
 
 function createResultDiv (result) {
     const resultDiv = document.querySelector('.results')
-
     if (!resultDiv) {
         const resultDiv = document.createElement("div");
         resultDiv.setAttribute("class", "results");  
         resultDiv.textContent = result;
-        resultArea.appendChild(resultDiv);
-        
+        resultArea.appendChild(resultDiv);        
     } else {
         resultDiv.textContent = result;
         archiveResult();
     };
-}
+};
 
 function archiveResult () {
     const last = document.querySelector('#history');
@@ -64,11 +66,31 @@ function archiveResult () {
     historyDiv.setAttribute("class", "resultHistory");
     historyDiv.textContent = currentResult;
     resultHistoryArea.appendChild(historyDiv);    
-}
+};
 
-function removeResult () {
-    currentResult = document.querySelector('.results');
-}
+function writeRound (usrTurn, pcTurn) {
+    const header = document.querySelector(".header");
+    const userResult = document.querySelector(".userPlay");
+    const pcResult = document.querySelector(".pcPlay");
+
+    if (!userResult) {
+        const userResult = document.createElement("div");
+        userResult.setAttribute("class", "userPlay");
+        userResult.textContent = 'User pick: ' + usrTurn;
+        header.appendChild(userResult);
+    } else {
+        userResult.textContent = 'User pick: '+ usrTurn;
+    }
+
+    if (!pcResult) {
+        const pcResult = document.createElement("div");
+        pcResult.setAttribute("class", "pcPlay");
+        pcResult.textContent = 'Computer pick: ' + pcTurn;
+        header.appendChild(pcResult);
+    } else {
+        pcResult.textContent = 'Computer pick: ' + pcTurn;
+    }    
+};
 
 const choices = document.querySelectorAll('.keyChoice');
 choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
@@ -78,4 +100,3 @@ noClickArea.forEach(click => click.addEventListener('click', () => alert("Please
 
 window.addEventListener('keydown', playThis);
 window.addEventListener('keyup', () => justPlayed = null)
-
