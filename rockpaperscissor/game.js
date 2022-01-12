@@ -40,11 +40,6 @@ function removeTransition (n) {
     this.classList.remove('playing');
 };
 
-const choices = document.querySelectorAll('.keyChoice');
-choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
-
-window.addEventListener('keydown', playThis);
-window.addEventListener('keyup', () => justPlayed = null)
 
 
 function createResultDiv (result) {
@@ -63,6 +58,8 @@ function createResultDiv (result) {
 }
 
 function archiveResult () {
+    const last = document.querySelector('#history');
+    last.textContent = "Last results:";
     const historyDiv = document.createElement("div");
     const currentResult = document.querySelector('.results').textContent;
 
@@ -74,3 +71,13 @@ function archiveResult () {
 function removeResult () {
     currentResult = document.querySelector('.results');
 }
+
+const choices = document.querySelectorAll('.keyChoice');
+choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
+
+const noClickArea = document.querySelectorAll(".userChoice");
+noClickArea.forEach(click => click.addEventListener('click', () => alert("Please use the keys R, P or S to play.")));
+
+window.addEventListener('keydown', playThis);
+window.addEventListener('keyup', () => justPlayed = null)
+
