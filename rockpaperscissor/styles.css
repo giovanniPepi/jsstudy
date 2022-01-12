@@ -9,7 +9,7 @@ body {
 
 .header {
     display: flex;
-    gap: 25rem;
+    gap: 5rem;
     background: rgb(241, 129, 25);
     margin: 1.5rem 0rem 5rem;
     padding: 2rem;
@@ -82,6 +82,6 @@ kbd {
     width: 20rem;
     height: 5rem;
     padding: .5rem;
-    box-shadow: .1rem .1rem 5rem rgba(73, 34, 105, 0.89);
+    box-shadow: .1rem .1rem .5rem rgba(73, 34, 105, 0.89);
     font-weight: bolder;
 }

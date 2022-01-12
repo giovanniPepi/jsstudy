@@ -1,5 +1,7 @@
 const pcTurn = pcPlay();
 let justPlayed = null;
+let usrScore = 0;
+let pcScore = 0; 
 const resultArea = document.querySelector(".resultArea")
 const resultHistoryArea = document.querySelector(".resultHistoryArea");
 
@@ -14,19 +16,25 @@ function gamePlay (usrTurn, pcTurn) {
             return(`Please type 'Rock', 'Paper' or 'Scissors' to play.`);
         } else if (usrTurn  == pcTurn) {
             writeRound (usrTurn, pcTurn);
-            return('It\'s a Draw!') 
+            ++usrScore;
+            ++pcScore;
+            return(`It\'s a Draw! You choose ${usrTurn}, computer chooses ${pcTurn} too.`); 
         } else if (pcTurn == 'scissors' && usrTurn  == 'paper') {
             writeRound (usrTurn, pcTurn);
-            return(`Nooo! You have lost, ${usrTurn} lose to ${pcTurn}`);
+            ++pcScore;
+            return(`Nooo! You have lost, you choose ${usrTurn}, computer chooses ${pcTurn}.`);
         } else if (pcTurn == 'paper' && usrTurn  == 'rock') {
             writeRound (usrTurn, pcTurn);
-            return(`You have lost, ${usrTurn} lose to ${pcTurn}`);
+            ++pcScore;
+            return(`Noo! You have lost, you choose ${usrTurn}, computer chooses ${pcTurn}.`);
         } else if (pcTurn == 'rock' && usrTurn  == 'scissors') {
             writeRound (usrTurn, pcTurn);
-            return(`Nooo! You have lost, ${usrTurn} lose to ${pcTurn}!`);
+            ++pcScore;
+            return(`Nooo! You have lost, you choose ${usrTurn}, computer chooses ${pcTurn}.`);
         } else {
             writeRound (usrTurn, pcTurn);
-            return(`YEAH! You have won, ${usrTurn} beats ${pcTurn}!`)
+            ++usrScore;
+            return(`YEAH! You have won, you choose ${usrTurn}, computer chooses ${pcTurn}.`)
         }
     };
 
@@ -68,27 +76,29 @@ function archiveResult () {
     resultHistoryArea.appendChild(historyDiv);    
 };
 
-function writeRound (usrTurn, pcTurn) {
+function writeRound () {
     const header = document.querySelector(".header");
     const userResult = document.querySelector(".userPlay");
     const pcResult = document.querySelector(".pcPlay");
 
     if (!userResult) {
-        const userResult = document.createElement("div");
+        const userResult = document.createElement("div");    
         userResult.setAttribute("class", "userPlay");
-        userResult.textContent = 'User pick: ' + usrTurn;
+        userResult.textContent = 'User score: ' + usrScore;
         header.appendChild(userResult);
+
     } else {
-        userResult.textContent = 'User pick: '+ usrTurn;
-    }
+        userResult.textContent = 'User score: ' + usrScore;
+    };
 
     if (!pcResult) {
         const pcResult = document.createElement("div");
         pcResult.setAttribute("class", "pcPlay");
-        pcResult.textContent = 'Computer pick: ' + pcTurn;
+       
+        pcResult.textContent = 'Computer score: ' + pcScore;
         header.appendChild(pcResult);
     } else {
-        pcResult.textContent = 'Computer pick: ' + pcTurn;
+        pcResult.textContent = 'Computer score: ' + pcScore;
     }    
 };
 
@@ -100,3 +110,5 @@ noClickArea.forEach(click => click.addEventListener('click', () => alert("Please
 
 window.addEventListener('keydown', playThis);
 window.addEventListener('keyup', () => justPlayed = null)
+
+
