@@ -122,16 +122,15 @@ function getFinalResults () {
     reloadOption.textContent="Play Again!";
 
     if (usrScore > pcScore) {
-        finalPlacar.textContent = "Final Score. You: " + usrScore + ". Computer: " +pcScore + ". " + "Congratulations!";
+        finalPlacar.textContent = "Final Score. You: " + usrScore + ". Computer: " +pcScore + ". " + "You win, congratulations! Easy peasy lemon squeezy!";
     } else if (usrScore < pcScore) {
-        finalPlacar.textContent = "Final Score. You: " + usrScore + ". Computer: " +pcScore + ". " + "Pathetic.";
+        finalPlacar.textContent = "Final Score. You: " + usrScore + ". Computer: " +pcScore + ". " + "You have lost. Pathetic. Weakness disgust me.";
     } else if (usrScore === pcScore) {
-        finalPlacar.textContent = "Final Score. You: " + usrScore + ". Computer: " +pcScore + ". " + "It was a tough one!";
+        finalPlacar.textContent = "Final Score. You: " + usrScore + ". Computer: " +pcScore + ". " + "Draw. It was a tough one!";
     }
     header.appendChild(finalPlacar);
     header.appendChild(reloadOption);   
 };
-
 
 const choices = document.querySelectorAll('.keyChoice');
 choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
