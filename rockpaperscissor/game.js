@@ -40,8 +40,6 @@ function removeTransition (n) {
     this.classList.remove('playing');
 };
 
-
-
 function createResultDiv (result) {
     const resultDiv = document.querySelector('.results')
 
