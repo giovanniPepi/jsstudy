@@ -1,0 +1,12 @@
+-> CSS/Animation: 
+
+
+- HTML: 'data-key' tag is used to map code for each key (keyCode);
+- There is an EventListener that listens for key downs and call the "PlayThis" function. 
+- PlayThis checks if the key's key code exists in the HTML. If it's not akey associated to game commands, it exits the function. 
+- justPlayed variable stores information if the key was just played before proceeding. This avoid a bug where CSS would freeze in the transition state if input was held for a long time. PlayThis() will return when the key's CSS transition state is not yet removed; 
+- when both if are falsy, playThis will then add the CSS class "playing" to the pressed key, generating an animation effect, and chaning justPlayed variable to non null; 
+
+- another event listener is listing for the nodes of game keys and stored in the const choices. Each key will listen for its node transitionend state, and then call removeTransition. If the selected node item doesn't have the "transform" css propery, it is then ignored (removed this). removeTransition will then remove the argument class' "playing" class, therefore returning to the initial state.
+
+- finally, and EventListener attached to window will change justPlayed const to null after the key is up;

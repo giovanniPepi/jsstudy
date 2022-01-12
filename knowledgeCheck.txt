@@ -1,0 +1,93 @@
+https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/fundamentals-part-4#knowledge-check
+
+What is an array?
+Array is a special variable that can hold more than one value
+
+What are arrays useful for?
+Arrays are useful for holding several values such as lists, and can be refered to by an index number
+
+How do you access an array element?
+Using index. Example:
+const cars = ["Saab", "Volvo", "BMW"];
+let car = cars[0]; //expected: Saab 
+
+How do you change an array element?
+cars[0] = "Opel"; 
+
+What are some useful array properties?
+Arrays can be objects and have different kinds of objects linked to each index number, can be acessed as a whole, length, etc
+
+What are some useful array methods?
+Length, sort, push, 
+
+What are loops useful for?
+Iterating through data, doing repetitive tasks, etc. 
+
+
+What is the break statement?
+Breaks out of the loop code before all the iterations are completed. 
+
+What is the continue statement?
+Similar to break, but breaks only the current iteration of the loop and continue from its beginning. 
+
+What is the advantage of writing automated tests?
+Tests can be productive and time saving to test functions created, as well as detecting points of failure in code.
+
+# https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/dom-manipulation-and-events
+
+
+    What is the DOM?
+The Document Object Model  is a tree-like representation of the contexts rendered by a browser in a website, a tree of nodes
+
+    How do you target the nodes you want to work with?
+document.querySelector, document.getElementById, etc
+    
+    How do you create an element in the DOM?
+using document.createElement('div') as an example;
+    
+    How do you add an element to the DOM?
+Using parentNode.appendChild(childNode) and others; 
+
+    How do you remove an element from the DOM?
+parentNode.removeChild(child);
+    
+    How can you alter an element in the DOM?
+using commands like div.setAttribute('id', 'theDiv');
+div.removeAttirubte('id');  
+    
+    When adding text to a DOM element, should you use textContent or innerHTML? Why?
+textContent is preferable to avoid JS injection to innerHTML;    
+    
+    Where should you include your Javascript tag in your HTML file when working with DOM nodes?
+ in the header
+    
+    How do “events” and “listeners” work?
+Events are actions that occur on the page, like mouse clicking, keypress, etc. Eventlisteners are built in JS functions that handle events dispatched by eventTargets;
+    
+    What are three ways to use events in your code?
+inline, arrow function on the js file, and using eventListeners    
+    
+    Why are event listeners the preferred way to handle events?
+ eventListeners are better in handling DOM manipulation and have several options      
+    
+    What are the benefits of using named functions in your listeners?
+Naming functions can clean up code as is a good practice. 
+    
+    How do you attach listeners to groups of nodes?
+using document.querySelectorAll and the forEach metode to iterate through each item.
+    
+    What is the difference between the return values of querySelector and querySelectorAll?
+querySelector retuns a single element, while querySelectorAll returns a nodelist of elements that match the selector  
+    
+    What does a “nodelist” contain?
+ Lists of elements; it behaves like an array but lacks functions of array 
+ 
+    Explain the difference between “capture” and “bubbling”.
+
+Capture = When you click on the element, it will go from top to down on the DOM tree. When enabled, run the function on the way down the tree.
+Capturing is not widely used and usually is invisible to us
+
+Bubbling = browser figures what you clicked, and everything "zoomed out" of this DOM node is triggered (propagation) => 
+When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.
+
+
