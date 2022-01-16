@@ -1,8 +1,10 @@
 const body = document.querySelector("body");
+const inventors = [];
 
-getHTML();
+createHTML();
+createEventListeners();
 
-function getHTML () {
+function createHTML () {
     const mainDiv = document.createElement("div");
     mainDiv.setAttribute("class", "mainDiv");
 
@@ -49,9 +51,50 @@ function getHTML () {
     mainDiv.appendChild(invDeathInpt);
     mainDiv.appendChild(submitDivBtn);
 
-    
-
-
     body.prepend(mainDiv);
 }
+
+function createEventListeners () {
+    const submitBtn = document.querySelector(".submitBtn");    
+    submitBtn.addEventListener("click", getInpt);
+};
+
+function getInpt () {
+    let inventor = {};
+
+    let invFirst = document.querySelector(".invFirstInpt").value; 
+    checkEmpty(invFirst)? alert('Invalid first name') : inventor.firstName = invFirst;
+    
+    let invLast = document.querySelector(".invLastInpt").value;     
+    checkEmpty(invLast)? alert("Invalid last name.") : inventor.lastName = invLast;
+
+    let invBirth = document.querySelector(".invBirthInpt").value;
+        if (checkEmpty(invBirth)) {
+            alert ("Invalid birth year");
+        } else if (checkNumber(invBirth)) {
+            inventor.birthYear = invBirth;
+        };
+
+    let invDeath = document.querySelector(".invDeathInpt").value; 
+        if (checkEmpty(invDeath)) {
+            alert ("Invalid decease year.");
+        } else if (checkNumber(invDeath)) {
+            inventor.birthYear = invDeath;
+        };
+
+    console.log(inventor);
+    inventors.push(inventor);
+    console.log(inventors);
+}; 
+
+function checkNumber (value) {
+    if (typeof value === NaN) {
+        return alert("Please enter a valid number!");
+    } else return true;
+}
+
+function checkEmpty (value) {
+    let empty = " ";
+    if (empty || value.length == 0) return true;
+};
 
