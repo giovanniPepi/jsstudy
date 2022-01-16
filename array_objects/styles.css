@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    gap: .5rem;
+    padding: .5rem;
+}
+button {
+    font-weight: bold;
+}
+
+.resultDiv {
+    margin: 1rem;
+    border: .4rem solid purple;
+    padding: 2rem;
+    width: 20rem;
+    height: 40rem;
+}
+.mainDiv {
+    margin: 1rem;
+    border: .2rem solid blue;
+    padding: 2rem;
+    width: 20rem;
+    height: 40rem;
+}
+
+.submitDivBtn {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.resultHeader {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+

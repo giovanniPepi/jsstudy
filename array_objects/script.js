@@ -1,10 +1,23 @@
 const body = document.querySelector("body");
-const inventors = [];
+const inventors = [
+    { firstName: 'Albert', lastName: 'Einstein', birthYear: 1879, deathYear: 1955 },
+    { firstName: 'Isaac', lastName: 'Newton', birthYear: 1643, deathYear: 1727 },
+    { firstName: 'Galileo', lastName: 'Galilei', birthYear: 1564, deathYear: 1642 },
+    { firstName: 'Marie', lastName: 'Curie', birthYear: 1867, deathYear: 1934 },
+    { firstName: 'Johannes', lastName: 'Kepler', birthYear: 1571, deathYear: 1630 },
+    { firstName: 'Nicolaus', lastName: 'Copernicus', birthYear: 1473, deathYear: 1543 },
+    { firstName: 'Max', lastName: 'Planck', birthYear: 1858, deathYear: 1947 },
+    { firstName: 'Katherine', lastName: 'Blodgett', birthYear: 1898, deathYear: 1979 },
+    { firstName: 'Ada', lastName: 'Lovelace', birthYear: 1815, deathYear: 1852 },
+    { firstName: 'Sarah E.', lastName: 'Goode', birthYear: 1855, deathYear: 1905 },
+    { firstName: 'Lise', lastName: 'Meitner', birthYear: 1878, deathYear: 1968 },
+    { firstName: 'Hanna', lastName: 'Hammarström', birthYear: 1829, deathYear: 1909 }
+];
 
-createHTML();
+createBaseHTML();
 createEventListeners();
 
-function createHTML () {
+function createBaseHTML () {
     const mainDiv = document.createElement("div");
     mainDiv.setAttribute("class", "mainDiv");
 
@@ -41,6 +54,16 @@ function createHTML () {
     submitBtn.textContent = "Submit!";
     submitDivBtn.appendChild(submitBtn);
 
+    const getBirthBtn = document.createElement("button");
+    getBirthBtn.setAttribute("class", "birthBtn");
+    getBirthBtn.textContent = "List Birth Year";
+    submitDivBtn.appendChild(getBirthBtn);
+
+    const ascendingBirthBtn = document.createElement("button");
+    ascendingBirthBtn.setAttribute("class", "ascendingBirthBtn");
+    ascendingBirthBtn.textContent = "Asceding Birth Year";
+    submitDivBtn.appendChild(ascendingBirthBtn);
+
     mainDiv.appendChild(invFirst);
     mainDiv.appendChild(invFirstInpt);
     mainDiv.appendChild(invLast);
@@ -56,45 +79,97 @@ function createHTML () {
 
 function createEventListeners () {
     const submitBtn = document.querySelector(".submitBtn");    
-    submitBtn.addEventListener("click", getInpt);
+    submitBtn.addEventListener("click", getInpt);    
+
+    const birthBtn = document.querySelector(".birthBtn")
+    birthBtn.addEventListener("click", getInventorBirth);
+
+    const ascendingBirthBtn = document.querySelector(".ascendingBirthBtn");
+    ascendingBirthBtn.addEventListener("click", getAscedingBirth);
 };
 
 function getInpt () {
     let inventor = {};
 
-    let invFirst = document.querySelector(".invFirstInpt").value; 
-    checkEmpty(invFirst)? alert('Invalid first name') : inventor.firstName = invFirst;
+    let invFirst = document.querySelector(".invFirstInpt").value;
+    checkEmpty(invFirst)? console.log('invalidFirst') : inventor.firstName = invFirst;
     
     let invLast = document.querySelector(".invLastInpt").value;     
-    checkEmpty(invLast)? alert("Invalid last name.") : inventor.lastName = invLast;
+    checkEmpty(invLast)? console.log('invalidLast') : inventor.lastName = invLast;
 
-    let invBirth = document.querySelector(".invBirthInpt").value;
-        if (checkEmpty(invBirth)) {
-            alert ("Invalid birth year");
-        } else if (checkNumber(invBirth)) {
+    let invBirth = parseInt(document.querySelector(".invBirthInpt").value);
+        if (isNaN(invBirth)) {
+            console.log('Please enter a valid year.')
+        } else {
             inventor.birthYear = invBirth;
-        };
+        }
 
-    let invDeath = document.querySelector(".invDeathInpt").value; 
-        if (checkEmpty(invDeath)) {
-            alert ("Invalid decease year.");
-        } else if (checkNumber(invDeath)) {
-            inventor.birthYear = invDeath;
-        };
+    let invDeath = parseInt(document.querySelector(".invDeathInpt").value); 
+        if (isNaN(invDeath)) {
+            console.log('Please enter a valid year.')
+        } else {
+            inventor.deathYear = invDeath;
+        }
 
-    console.log(inventor);
-    inventors.push(inventor);
-    console.log(inventors);
+    if (invFirst && invLast && invBirth && invDeath){
+        console.table(inventor);
+        inventors.push(inventor);
+        console.table(inventors);
+    }  
 }; 
-
-function checkNumber (value) {
-    if (typeof value === NaN) {
-        return alert("Please enter a valid number!");
-    } else return true;
-}
 
 function checkEmpty (value) {
     let empty = " ";
-    if (empty || value.length == 0) return true;
+    if (value === empty || value.length == 0) return true;
 };
 
+function createResultHTML () {
+    const resultDiv = document.querySelector(".resultDiv");    
+    if (!resultDiv) {
+        const resultDiv = document.createElement("div");
+        resultDiv.setAttribute("class", "resultDiv");
+        body.appendChild(resultDiv);
+    }
+};
+
+function getInventorBirth () {
+    createResultHTML();    
+    const resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";  
+    
+    for (inventor of inventors) {
+        const yearP = document.createElement("p");
+        yearP.textContent = `${inventor.firstName} ${inventor.lastName}: ${inventor.birthYear}`
+        resultDiv.appendChild(yearP);        
+    };
+    
+    const resultHeader = document.querySelector(".resultHeader");
+    if (!resultHeader){
+        const resultHeader = document.createElement("p");
+        resultHeader.setAttribute("class", "resultHeader");
+        resultHeader.textContent = "Inventor's birth year: ";
+        resultDiv.prepend(resultHeader);
+    };    
+}
+
+function getAscedingBirth () {
+    createResultHTML(); 
+    const resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    const ordered = inventors.sort((a,b) =>  a.birthYear > b.birthYear? 1 : -1);
+
+    for (inventor of ordered) {
+        const yearP = document.createElement("p");
+        yearP.textContent = `${inventor.firstName} ${inventor.lastName}: ${inventor.birthYear}`
+        resultDiv.appendChild(yearP);
+    }
+
+    const resultHeader = document.querySelector(".resultHeader");
+    if (!resultHeader){
+        const resultHeader = document.createElement("p");
+        resultHeader.setAttribute("class", "resultHeader");
+        resultHeader.textContent = "Inventors by birth year: ";
+        resultDiv.prepend(resultHeader);
+    }
+};
