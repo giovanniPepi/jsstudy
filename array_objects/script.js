@@ -45,7 +45,6 @@ function createBaseHTML () {
     const invDeathInpt = document.createElement("input");
     invDeathInpt.setAttribute("class", "invDeathInpt");
   
-
     const submitDivBtn = document.createElement("div");
     submitDivBtn.setAttribute("class", "submitDivBtn");
 
@@ -75,6 +74,17 @@ function createBaseHTML () {
     bornBirthBtn.textContent = "Check inventors born between 1820 and 1920.";
     submitDivBtn.appendChild(bornBirthBtn);
 
+    const lifetimeBtn = document.createElement("button");
+    lifetimeBtn.setAttribute("class", "lifetimeBtn");
+    lifetimeBtn.textContent = "Calculate total years lived";
+    submitDivBtn.appendChild(lifetimeBtn);
+
+    const seniorBtn = document.createElement("button");
+    seniorBtn.setAttribute("class", "seniorBtn");
+    seniorBtn.textContent = "Sort by seniority!";
+    submitDivBtn.appendChild(seniorBtn);
+
+    /*
     const aliveBirthBtn = document.createElement("button");
     aliveBirthBtn.setAttribute("class", "aliveBirthBtn");
     aliveBirthBtn.textContent = "Click for inventors alive in year: ";
@@ -83,7 +93,7 @@ function createBaseHTML () {
     const aliveInput = document.createElement("input")
     aliveInput.setAttribute("class", "aliveInput");
     aliveInput.value = "...year";
-    submitDivBtn.appendChild(aliveInput);
+    submitDivBtn.appendChild(aliveInput); */
 
     mainDiv.appendChild(invFirst);
     mainDiv.appendChild(invFirstInpt);
@@ -113,6 +123,12 @@ function createEventListeners () {
 
     const bornInBtn = document.querySelector(".bornBirthBtn");
     bornInBtn.addEventListener("click", getBornIn);
+
+    const lifetimeBtn = document.querySelector(".lifetimeBtn");
+    lifetimeBtn.addEventListener("click", getLifetime);
+
+    const seniorBtn = document.querySelector(".seniorBtn");
+    seniorBtn.addEventListener("click", getSeniorInventor);
 };
 
 function getInpt () {
@@ -158,6 +174,18 @@ function createResultHTML () {
         body.appendChild(resultDiv);
     }
 };
+
+function getResultHeader (resultName) {
+    const resultHeader = document.querySelector(".resultHeader");
+
+    if (!resultHeader){
+        const resultDiv = document.querySelector(".resultDiv");
+        const resultHeader = document.createElement("p");
+        resultHeader.setAttribute("class", "resultHeader");
+        resultHeader.textContent = `${resultName}: `;
+        resultDiv.prepend(resultHeader);
+    };
+}
 
 function getInventorBirth () {
     createResultHTML();    
@@ -217,16 +245,39 @@ function getBornIn () {
         resultDiv.appendChild(yearP);
     }
     getResultHeader("Inventors born between 1820 and 1920");
-}
+};
 
-function getResultHeader (resultName) {
-    const resultHeader = document.querySelector(".resultHeader");
+function getLifetime () {
+    createResultHTML();
 
-    if (!resultHeader){
-        const resultDiv = document.querySelector(".resultDiv");
-        const resultHeader = document.createElement("p");
-        resultHeader.setAttribute("class", "resultHeader");
-        resultHeader.textContent = `${resultName}: `;
-        resultDiv.prepend(resultHeader);
-    };
-}
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    const lifetime = inventors.reduce((total, inventor) => {
+        return total + (inventor.deathYear - inventor.birthYear);
+    }, 0)
+    
+    const yearP = document.createElement("p");
+    yearP.textContent = `${lifetime} years lived in total.`;
+    resultDiv.appendChild(yearP);
+    getResultHeader("Total years lived by inventors: ")
+};
+
+function getSeniorInventor () {
+    createResultHTML();
+
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    const oldest = inventors.sort (function (a, b) {
+        const current = a.deathYear - a.birthYear;
+        const next = b.deathYear - b.birthYear;
+        return current > next? -1 : 1;
+    });
+    for (senior of oldest) {
+        const yearP = document.createElement("p")
+        yearP.textContent = `${senior.firstName} ${senior.lastName}, ${senior.deathYear - senior.birthYear} years old.`;
+        resultDiv.appendChild(yearP);
+    }
+  getResultHeader("Inventors by their age: ");
+};
