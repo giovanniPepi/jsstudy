@@ -61,8 +61,13 @@ function createBaseHTML () {
 
     const ascendingBirthBtn = document.createElement("button");
     ascendingBirthBtn.setAttribute("class", "ascendingBirthBtn");
-    ascendingBirthBtn.textContent = "Asceding Birth Year";
+    ascendingBirthBtn.textContent = "Ascending Birth Year";
     submitDivBtn.appendChild(ascendingBirthBtn);
+
+    const descendingBirthBtn = document.createElement("button");
+    descendingBirthBtn.setAttribute("class", "descendingBirthBtn");
+    descendingBirthBtn.textContent = "Descending Birth Year";
+    submitDivBtn.appendChild(descendingBirthBtn);
 
     mainDiv.appendChild(invFirst);
     mainDiv.appendChild(invFirstInpt);
@@ -85,7 +90,10 @@ function createEventListeners () {
     birthBtn.addEventListener("click", getInventorBirth);
 
     const ascendingBirthBtn = document.querySelector(".ascendingBirthBtn");
-    ascendingBirthBtn.addEventListener("click", getAscedingBirth);
+    ascendingBirthBtn.addEventListener("click", getAscendingBirth);
+
+    const descendingBirthBtn = document.querySelector(".descendingBirthBtn");
+    descendingBirthBtn.addEventListener("click", getDescendingBirth);
 };
 
 function getInpt () {
@@ -152,7 +160,7 @@ function getInventorBirth () {
     };    
 }
 
-function getAscedingBirth () {
+function getAscendingBirth () {
     createResultHTML(); 
     const resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";
@@ -170,6 +178,29 @@ function getAscedingBirth () {
         const resultHeader = document.createElement("p");
         resultHeader.setAttribute("class", "resultHeader");
         resultHeader.textContent = "Inventors by birth year: ";
+        resultDiv.prepend(resultHeader);
+    }
+};
+
+function getDescendingBirth () {
+    createResultHTML(); 
+    const resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    const ordered = inventors.sort((a,b) =>  a.birthYear < b.birthYear? 1 : -1);
+    // 1 puts the object on top, while -1 on bottom of the list;
+
+    for (inventor of ordered) {
+        const yearP = document.createElement("p");
+        yearP.textContent = `${inventor.firstName} ${inventor.lastName}: ${inventor.birthYear}`
+        resultDiv.appendChild(yearP);
+    }
+
+    const resultHeader = document.querySelector(".resultHeader");
+    if (!resultHeader){
+        const resultHeader = document.createElement("p");
+        resultHeader.setAttribute("class", "resultHeader");
+        resultHeader.textContent = "Inventors by descending birth year: ";
         resultDiv.prepend(resultHeader);
     }
 };
