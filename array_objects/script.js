@@ -69,6 +69,22 @@ function createBaseHTML () {
     descendingBirthBtn.textContent = "Descending Birth Year";
     submitDivBtn.appendChild(descendingBirthBtn);
 
+
+    const bornBirthBtn = document.createElement("button");
+    bornBirthBtn.setAttribute("class", "bornBirthBtn");
+    bornBirthBtn.textContent = "Check inventors born between 1820 and 1920.";
+    submitDivBtn.appendChild(bornBirthBtn);
+
+    const aliveBirthBtn = document.createElement("button");
+    aliveBirthBtn.setAttribute("class", "aliveBirthBtn");
+    aliveBirthBtn.textContent = "Click for inventors alive in year: ";
+    submitDivBtn.appendChild(aliveBirthBtn);
+
+    const aliveInput = document.createElement("input")
+    aliveInput.setAttribute("class", "aliveInput");
+    aliveInput.value = "...year";
+    submitDivBtn.appendChild(aliveInput);
+
     mainDiv.appendChild(invFirst);
     mainDiv.appendChild(invFirstInpt);
     mainDiv.appendChild(invLast);
@@ -94,6 +110,9 @@ function createEventListeners () {
 
     const descendingBirthBtn = document.querySelector(".descendingBirthBtn");
     descendingBirthBtn.addEventListener("click", getDescendingBirth);
+
+    const bornInBtn = document.querySelector(".bornBirthBtn");
+    bornInBtn.addEventListener("click", getBornIn);
 };
 
 function getInpt () {
@@ -150,14 +169,7 @@ function getInventorBirth () {
         yearP.textContent = `${inventor.firstName} ${inventor.lastName}: ${inventor.birthYear}`
         resultDiv.appendChild(yearP);        
     };
-    
-    const resultHeader = document.querySelector(".resultHeader");
-    if (!resultHeader){
-        const resultHeader = document.createElement("p");
-        resultHeader.setAttribute("class", "resultHeader");
-        resultHeader.textContent = "Inventor's birth year: ";
-        resultDiv.prepend(resultHeader);
-    };    
+    getResultHeader("Inventor's birth year: ");
 }
 
 function getAscendingBirth () {
@@ -172,14 +184,7 @@ function getAscendingBirth () {
         yearP.textContent = `${inventor.firstName} ${inventor.lastName}: ${inventor.birthYear}`
         resultDiv.appendChild(yearP);
     }
-
-    const resultHeader = document.querySelector(".resultHeader");
-    if (!resultHeader){
-        const resultHeader = document.createElement("p");
-        resultHeader.setAttribute("class", "resultHeader");
-        resultHeader.textContent = "Inventors by birth year: ";
-        resultDiv.prepend(resultHeader);
-    }
+    getResultHeader("Inventors by birth year: ");
 };
 
 function getDescendingBirth () {
@@ -195,12 +200,33 @@ function getDescendingBirth () {
         yearP.textContent = `${inventor.firstName} ${inventor.lastName}: ${inventor.birthYear}`
         resultDiv.appendChild(yearP);
     }
+    getResultHeader("Inventors by descending birth year: ");
+};
 
+function getBornIn () {
+    createResultHTML();
+
+    const resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    const born = inventors.filter(inventor => (inventor.birthYear >=1820 && inventor.birthYear <= 1920));
+    
+    for (inventor of born) {
+        const yearP = document.createElement("p");
+        yearP.textContent = `${inventor.firstName} ${inventor.lastName}`;
+        resultDiv.appendChild(yearP);
+    }
+    getResultHeader("Inventors born between 1820 and 1920");
+}
+
+function getResultHeader (resultName) {
     const resultHeader = document.querySelector(".resultHeader");
+
     if (!resultHeader){
+        const resultDiv = document.querySelector(".resultDiv");
         const resultHeader = document.createElement("p");
         resultHeader.setAttribute("class", "resultHeader");
-        resultHeader.textContent = "Inventors by descending birth year: ";
+        resultHeader.textContent = `${resultName}: `;
         resultDiv.prepend(resultHeader);
-    }
-};
+    };
+}
