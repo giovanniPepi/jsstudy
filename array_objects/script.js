@@ -97,6 +97,11 @@ function createBaseHTML () {
     peopleBtn.textContent = "Random people in alphabetical order";
     submitDivBtn.appendChild(peopleBtn);
 
+    const dupBtn = document.createElement("button");
+    dupBtn.setAttribute("class", "dupBtn");
+    dupBtn.textContent = "Check duplicates in people list";
+    submitDivBtn.appendChild(dupBtn);
+
     /*
     const aliveBirthBtn = document.createElement("button");
     aliveBirthBtn.setAttribute("class", "aliveBirthBtn");
@@ -145,6 +150,9 @@ function createEventListeners () {
 
     const peopleBtn = document.querySelector(".peopleBtn");
     peopleBtn.addEventListener("click", getAlphaOrder);
+
+    const dupBtn = document.querySelector(".dupBtn");
+    dupBtn.addEventListener("click", checkDuplicate);
 };
 
 function getInpt () {
@@ -308,7 +316,6 @@ function getAlphaOrder () {
         const [bLast, bFirst] = nextOne.split(", ");
         return aLast > bLast? 1:-1; //orders up based on last name alphab order;
     });
-
     for (let i = 0; i < alpha.length; i++){
         const yearP = document.createElement("p")
         yearP.textContent = alpha[i];
@@ -318,3 +325,27 @@ function getAlphaOrder () {
     resultDiv = document.querySelector(".resultDiv");
     resultDiv.style.height = "auto";
 };
+ 
+
+function checkDuplicate () {    
+    createResultHTML();
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+    const countedList = people.reduce (function (obj, item) {
+        if(!obj[item]) {
+        obj[item] = 0; // starts the obj item in the first pass
+    }
+        obj[item]++;
+        return obj;
+    }, {});
+    
+        const yearP = document.createElement("p")
+        yearP.textContent = (JSON.stringify(countedList, null, 2));
+        resultDiv.appendChild(yearP);
+    
+
+    getResultHeader("How many times each name appears: ")
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.style.height = "auto";
+
+}
