@@ -22,10 +22,9 @@ const people = [
     'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
   ];
 
-createBaseHTML();
-createEventListeners();
 
-function createBaseHTML () {
+
+createBaseHTML = () => {
     const mainDiv = document.createElement("div");
     mainDiv.setAttribute("class", "mainDiv");
 
@@ -125,8 +124,7 @@ function createBaseHTML () {
 
     body.prepend(mainDiv);
 }
-
-function createEventListeners () {
+createEventListeners = () => {
     const submitBtn = document.querySelector(".submitBtn");    
     submitBtn.addEventListener("click", getInpt);    
 
@@ -155,7 +153,7 @@ function createEventListeners () {
     dupBtn.addEventListener("click", checkDuplicate);
 };
 
-function getInpt () {
+getInpt = () => {
     let inventor = {};
 
     let invFirst = document.querySelector(".invFirstInpt").value;
@@ -185,12 +183,12 @@ function getInpt () {
     }  
 }; 
 
-function checkEmpty (value) {
+checkEmpty = (value) => {
     let empty = " ";
     if (value === empty || value.length == 0) return true;
 };
 
-function createResultHTML () {
+createResultHTML = () => {
     const resultDiv = document.querySelector(".resultDiv");    
     if (!resultDiv) {
         const resultDiv = document.createElement("div");
@@ -199,7 +197,7 @@ function createResultHTML () {
     }
 };
 
-function getResultHeader (resultName) {
+getResultHeader = (resultName) => {
     const resultHeader = document.querySelector(".resultHeader");
 
     if (!resultHeader){
@@ -211,7 +209,7 @@ function getResultHeader (resultName) {
     };
 }
 
-function getInventorBirth () {
+getInventorBirth = () => {
     createResultHTML();    
     const resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";  
@@ -224,7 +222,7 @@ function getInventorBirth () {
     getResultHeader("Inventor's birth year: ");
 }
 
-function getAscendingBirth () {
+getAscendingBirth = () => {
     createResultHTML(); 
     const resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";
@@ -239,7 +237,7 @@ function getAscendingBirth () {
     getResultHeader("Inventors by birth year: ");
 };
 
-function getDescendingBirth () {
+getDescendingBirth = () => {
     createResultHTML(); 
     const resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";
@@ -255,7 +253,7 @@ function getDescendingBirth () {
     getResultHeader("Inventors by descending birth year: ");
 };
 
-function getBornIn () {
+getBornIn = () => {
     createResultHTML();
 
     const resultDiv = document.querySelector(".resultDiv");
@@ -271,7 +269,7 @@ function getBornIn () {
     getResultHeader("Inventors born between 1820 and 1920");
 };
 
-function getLifetime () {
+getLifetime = () => {
     createResultHTML();
 
     resultDiv = document.querySelector(".resultDiv");
@@ -287,13 +285,13 @@ function getLifetime () {
     getResultHeader("Total years lived by inventors: ")
 };
 
-function getSeniorInventor () {
+getSeniorInventor = () => {
     createResultHTML();
 
     resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";
 
-    const oldest = inventors.sort (function (a, b) {
+    const oldest = inventors.sort((a, b) => {
         const current = a.deathYear - a.birthYear;
         const next = b.deathYear - b.birthYear;
         return current > next? -1 : 1;
@@ -306,12 +304,12 @@ function getSeniorInventor () {
   getResultHeader("Inventors by their age: ");
 };
 
-function getAlphaOrder () {
+getAlphaOrder = () => {
     createResultHTML();
     resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";
 
-    const alpha = people.sort ((lastOne, nextOne) => {
+    const alpha = people.sort((lastOne, nextOne) => {
         const [aLast, aFirst] = lastOne.split (", "); //split done to str to compare last names 
         const [bLast, bFirst] = nextOne.split(", ");
         return aLast > bLast? 1:-1; //orders up based on last name alphab order;
@@ -325,27 +323,26 @@ function getAlphaOrder () {
     resultDiv = document.querySelector(".resultDiv");
     resultDiv.style.height = "auto";
 };
- 
 
-function checkDuplicate () {    
+checkDuplicate= () => {    
     createResultHTML();
     resultDiv = document.querySelector(".resultDiv");
     resultDiv.innerHTML = "";
-    const countedList = people.reduce (function (obj, item) {
+    const countedList = people.reduce((obj, item) =>{
         if(!obj[item]) {
         obj[item] = 0; // starts the obj item in the first pass
     }
         obj[item]++;
         return obj;
-    }, {});
-    
-        const yearP = document.createElement("p")
+    }, {});    
+        const yearP = dkocument.createElement("p")
         yearP.textContent = (JSON.stringify(countedList, null, 2));
-        resultDiv.appendChild(yearP);
-    
+        resultDiv.appendChild(yearP);   
 
     getResultHeader("How many times each name appears: ")
     resultDiv = document.querySelector(".resultDiv");
     resultDiv.style.height = "auto";
-
 }
+
+createBaseHTML();
+createEventListeners();
