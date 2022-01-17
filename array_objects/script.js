@@ -14,6 +14,14 @@ const inventors = [
     { firstName: 'Hanna', lastName: 'Hammarström', birthYear: 1829, deathYear: 1909 }
 ];
 
+const people = [
+    'Bernhard, Sandra', 'Bethea, Erin', 'Becker, Carl', 'Bentsen, Lloyd', 'Beckett, Samuel', 'Blake, William', 'Berger, Ric', 'Beddoes, Mick', 'Beethoven, Ludwig',
+    'Belloc, Hilaire', 'Begin, Menachem', 'Bellow, Saul', 'Benchley, Robert', 'Blair, Robert', 'Benenson, Peter', 'Benjamin, Walter', 'Berlin, Irving',
+    'Benn, Tony', 'Benson, Leana', 'Bent, Silas', 'Berle, Milton', 'Berry, Halle', 'Biko, Steve', 'Beck, Glenn', 'Bergman, Ingmar', 'Black, Elk', 'Berio, Luciano',
+    'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
+    'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
+  ];
+
 createBaseHTML();
 createEventListeners();
 
@@ -84,6 +92,11 @@ function createBaseHTML () {
     seniorBtn.textContent = "Sort by seniority!";
     submitDivBtn.appendChild(seniorBtn);
 
+    const peopleBtn = document.createElement("button");
+    peopleBtn.setAttribute("class", "peopleBtn");
+    peopleBtn.textContent = "Random people in alphabetical order";
+    submitDivBtn.appendChild(peopleBtn);
+
     /*
     const aliveBirthBtn = document.createElement("button");
     aliveBirthBtn.setAttribute("class", "aliveBirthBtn");
@@ -129,6 +142,9 @@ function createEventListeners () {
 
     const seniorBtn = document.querySelector(".seniorBtn");
     seniorBtn.addEventListener("click", getSeniorInventor);
+
+    const peopleBtn = document.querySelector(".peopleBtn");
+    peopleBtn.addEventListener("click", getAlphaOrder);
 };
 
 function getInpt () {
@@ -280,4 +296,25 @@ function getSeniorInventor () {
         resultDiv.appendChild(yearP);
     }
   getResultHeader("Inventors by their age: ");
+};
+
+function getAlphaOrder () {
+    createResultHTML();
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    const alpha = people.sort ((lastOne, nextOne) => {
+        const [aLast, aFirst] = lastOne.split (", "); //split done to str to compare last names 
+        const [bLast, bFirst] = nextOne.split(", ");
+        return aLast > bLast? 1:-1; //orders up based on last name alphab order;
+    });
+
+    for (let i = 0; i < alpha.length; i++){
+        const yearP = document.createElement("p")
+        yearP.textContent = alpha[i];
+        resultDiv.appendChild(yearP);
+    };
+    getResultHeader("People by alphabetical order: ")
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.style.height = "auto";
 };
