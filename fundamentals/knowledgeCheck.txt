@@ -91,3 +91,18 @@ Bubbling = browser figures what you clicked, and everything "zoomed out" of this
 When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.
 
 
+https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/fundamentals-part-5
+
+What is the difference between objects and arrays?
+Objects are arrays with special features: property keys (key-value pairs), additional operators like obj.property, delete obj.prop, key in obj, iterate using (key in obj), and others.
+
+How do you access object properties?
+dot notation (person.age, person.name.first) or square brackets (person['age]', person['name'['first']);
+
+What is Array.prototype.map() useful for?
+map takes an array, process the array with a function, and return a new array of the same length. Like a factory.
+
+What is Array.prototype.reduce() useful for?
+Reduce build something on every single item of the array and returns the processed array. Each iteration retuns the total result before, and the current iteration. 
+
+

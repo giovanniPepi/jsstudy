@@ -22,8 +22,6 @@ const people = [
     'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
   ];
 
-
-
 createBaseHTML = () => {
     const mainDiv = document.createElement("div");
     mainDiv.setAttribute("class", "mainDiv");
@@ -101,6 +99,10 @@ createBaseHTML = () => {
     dupBtn.textContent = "Check duplicates in people list";
     submitDivBtn.appendChild(dupBtn);
 
+    const mostAliveBtn = document.createElement("button");
+    mostAliveBtn.setAttribute("class", "mostAliveBtn");
+    mostAliveBtn.textContent = "Year with most inventors alive";
+    submitDivBtn.appendChild(mostAliveBtn);
     /*
     const aliveBirthBtn = document.createElement("button");
     aliveBirthBtn.setAttribute("class", "aliveBirthBtn");
@@ -111,6 +113,7 @@ createBaseHTML = () => {
     aliveInput.setAttribute("class", "aliveInput");
     aliveInput.value = "...year";
     submitDivBtn.appendChild(aliveInput); */
+
 
     mainDiv.appendChild(invFirst);
     mainDiv.appendChild(invFirstInpt);
@@ -151,6 +154,9 @@ createEventListeners = () => {
 
     const dupBtn = document.querySelector(".dupBtn");
     dupBtn.addEventListener("click", checkDuplicate);
+
+    const mostAliveBtn = document.querySelector(".mostAliveBtn");
+    mostAliveBtn.addEventListener("click", getMostAlive);
 };
 
 getInpt = () => {
@@ -344,5 +350,26 @@ checkDuplicate= () => {
     resultDiv.style.height = "auto";
 }
 
+getMostAlive = () => {
+    createResultHTML();
+    resultDiv = document.querySelector(".resultDiv");
+    resultDiv.innerHTML = "";
+
+    // callback marks +1 for birth, -1 for death
+        let counts = inventors.reduce((total, current) => 
+            (total[current.birthYear] = (total[current.birthYear] || 0) + 1,  
+            total[current.deathYear] = (total[current.deathYear] || 0) - 1, total), []);
+        let maxYear = 0, maxCount = 0, count = 0;
+        counts.forEach((c, y) => {
+        count += c;
+        if (maxCount < count) {
+            maxCount = count;
+            maxYear = y;
+        }
+        });
+        getResultHeader(`Year with most inventors alive: ${maxYear}, Total alive:  ${maxCount}`);
+};
+    
 createBaseHTML();
 createEventListeners();
+
