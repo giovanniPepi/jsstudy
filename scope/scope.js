@@ -3,6 +3,7 @@ let myFunction = function () {
     console.log(name);
 };
 
+myFunction(); 
 /* The variable name is scoped locally, it isn’t exposed to the 
 parent scope and therefore undefined.The variable name is scoped locally, it isn’t exposed to the parent
 scope and therefore undefined. */ 
@@ -15,4 +16,6 @@ let myFunction2 = function () {
         // Scope C
     }
 }
+
+myFunction2();
 
