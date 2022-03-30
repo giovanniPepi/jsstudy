@@ -76,7 +76,7 @@ myModule.publicMethod();
 
    // 
 
-   const Formatter = (function() {
+   const Formatter = (function(doc) {
     console.log('start');
 
     let timesRun = [];
@@ -89,14 +89,51 @@ myModule.publicMethod();
         return text.toUpperCase();
       };  
 
+    const writeToDom = (selector, message) => {
+        // only runs when acess to DOM is available
+        if (!!doc && "querySelector" in doc){
+            doc.querySelector(selector).innerHTML = message;
+        }
+    }
+
     return {
         makeUpperCase,
         timesRun,
+        writeToDom,
     }
 
-   })();
+   })(document);
 
    console.log(Formatter.makeUpperCase('jooooooooohn '));
    console.log(Formatter.makeUpperCase('jooooooooohn '));
    console.log(Formatter.makeUpperCase('jooooooooohn '));
    console.log(Formatter.timesRun.length);
+
+
+/* another way to test: */ 
+
+const documentMock = (() => ({
+    querySelector: (selector) => ({
+        innerHTML: null,
+    }),
+}))();
+
+   const Formatter2 = (function(doc) {
+    const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+
+    const makeUpperCase = (text) => {
+        log("Making uppercase");
+        return text.toUpperCase();
+      };  
+
+    const writeToDom = (selector, message) => {
+            doc.querySelector(selector).innerHTML = message;
+        }
+
+    return {
+        makeUpperCase,
+        timesRun,
+        writeToDom,
+    }
+
+   })(document || documentMock);
