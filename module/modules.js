@@ -73,3 +73,30 @@ myModule.publicMethod();
   console.log(myModule3._privateProperty); // und
   /* myModule3._privateMethod(); 
    */ // TypeError, protected by the module closure
+
+   // 
+
+   const Formatter = (function() {
+    console.log('start');
+
+    let timesRun = [];
+
+    const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+
+    const makeUpperCase = (text) => {
+        log("Making uppercase");
+        timesRun.push(null);
+        return text.toUpperCase();
+      };  
+
+    return {
+        makeUpperCase,
+        timesRun,
+    }
+
+   })();
+
+   console.log(Formatter.makeUpperCase('jooooooooohn '));
+   console.log(Formatter.makeUpperCase('jooooooooohn '));
+   console.log(Formatter.makeUpperCase('jooooooooohn '));
+   console.log(Formatter.timesRun.length);
