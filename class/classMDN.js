@@ -175,4 +175,46 @@ class Rectangle6 {
   }
 }
 
-// private field
+// private field declaration
+
+/* 
+It's an error to reference private fields from outside of the class; they can only be read or written within the class body. 
+By defining things that are not visible outside of the class, you ensure that your classes' users can't depend on internals, 
+which may change from version to version. 
+ */
+
+class Rectangle7 {
+  #height = 0; 
+  #width; 
+
+  constructor(height, width) {
+    this.#height = height;
+    this.#width = width;
+  }
+}
+
+// EXTENDS
+
+class Animal3 {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a noite`); 
+  }
+}
+
+class Dog extends Animal {
+  constructor(name) {
+    super(name); // calls the super class constructor
+  }
+
+  speak() {
+    console.log(`${this.name} barks!`);
+  }
+}
+
+let d = new Dog('Mitzie');
+d.speak();
+
