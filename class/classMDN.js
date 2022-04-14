@@ -109,8 +109,70 @@ p2.distance;
 console.log(Point.displayName);
 console.log(Point.distance(p1, p2));
 
+// binding this
+
+class Animal {
+  speak() {
+    return this;
+  }
+  static eat() {
+    return this; 
+  }
+}
+
+let obj = new Animal(); 
+obj.speak(); //will return the Animal object
+// undefined:  
+//let speak = obj.speak;
+// speak(); 
+
+Animal.eat() //class Animal
+//undefined: 
+// let eat = Animal.eat;
+// eat(); 
 
 
+// in strict mode, autobinding will not happen
+// this is autobind in traditional function based syntax: 
 
+function Animal2() {
+  
+  Animal.prototype.speak = function() {
+    return this;
+  }
 
+  Animal.eat = function() {
+    return this; 
+  }
+}
 
+let obj2 = new Animal(); 
+let speak = obj2.speak; 
+speak(); 
+
+let eat = Animal.eat;
+eat();
+
+// instance properties
+// Instance properties must be defined inside of class methods:
+class Rectangle5 {
+  constructor(height, width) {
+    this.height = height; 
+    this.width = width; 
+  }  
+}
+
+// Public field declaration
+//with javascript field declaration, we can write the above as
+// By declaring fields up-front, class definitions become more self-documenting, 
+// and the fields are always present.
+class Rectangle6 {
+  height = 0;
+  width; 
+  constructor(height, width) {
+    this.height = height;
+    this.width = width; 
+  }
+}
+
+// private field
