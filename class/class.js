@@ -86,6 +86,9 @@ console.log(User2.prototype.name);
 
 class Button {
   constructor(value) {
+    // binding this
+    
+    class Button {
     this.value = value; 
   }
 
