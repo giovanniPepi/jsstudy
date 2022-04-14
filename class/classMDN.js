@@ -205,7 +205,8 @@ class Animal3 {
   }
 }
 
-class Dog extends Animal {
+class Dog extends Animal3 {
+
   constructor(name) {
     super(name); // calls the super class constructor
   }
@@ -217,4 +218,47 @@ class Dog extends Animal {
 
 let d = new Dog('Mitzie');
 d.speak();
+
+/* If there is a constructor present in the subclass, 
+it needs to first call super() before using "this".
+ */
+
+function Animal4(name) {
+  this.name = name;
+}
+
+Animal4.prototype.speak = function() {
+  console.log(`${this.name} makes a noise.`);
+}
+
+class Dog2 extends Animal4 {
+  speak(){
+    console.log(`${this.name} barks!`);
+  }
+}
+
+let b = new Dog2('Chraunz');
+b.speak();
+
+// classes cannot extends regular non constructible objects
+// if you want to inherit from a regular object, use 
+// Object.setPrototypeOf(); 
+
+const Animal5 = {
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  }
+};
+
+class Dog3 {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+Object.setPrototypeOf(Dog3.prototype, Animal5);
+let c = new Dog3('auhehe');
+c.speak();
+
+// species
 
