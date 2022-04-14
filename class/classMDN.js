@@ -261,4 +261,59 @@ let c = new Dog3('auhehe');
 c.speak();
 
 // species
+// species pattern let you override default constructors
 
+/* For example, when using methods such as map() that returns
+the default constructor, you want these methods to return a 
+parent Array object, instead of the MyArray object. 
+The Symbol.species symbol lets you do this: */
+
+class MyArray extends Array {
+  // overwrites species to the parent array constructor
+  static get [Symbol.species]() {return Array;}
+}
+
+let a = new MyArray(1, 2, 3);
+let mapped = a.map(x => x*x);
+
+console.log(mapped instanceof MyArray);
+console.log(mapped instanceof Array);
+
+// super class with super
+
+/* The super keyword is used to call corresponding methods of 
+super class. This is one advantage over prototype-based inheritance.  */
+
+class Cat {
+  constructor(name) {
+    this.name = name;
+  }
+  
+  speak() {
+    console.log(`${this.name} makes a noise`);
+  }
+}
+
+class Lion extends Cat {
+  speak() {
+    super.speak();
+    console.log(`${this.name} roars`);
+  }
+}
+
+let l = new Lion('Fuzzy');
+l.speak();
+
+
+//mix ins 
+
+let calculatorMixin = Base => class extends Base {
+  calc() { }
+};
+
+let randomizerMixin = Base => class extends Base {
+  randomize() { }
+};
+
+class Foo { }
+class Bar extends calculatorMixin(randomizerMixin(Foo)) { }
