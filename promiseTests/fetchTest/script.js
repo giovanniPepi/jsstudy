@@ -2,25 +2,19 @@ const moreCats = document.querySelector(".moreCats");
 const searchBtn = document.querySelector(".go");
 const searchInput = document.querySelector("#search");
 const errorDiv = document.querySelector(".errorDiv");
+const img = document.querySelector("img");
 
-const getGif = (param) => {
-  const img = document.querySelector("img");
-  fetch(`https://api.giphy.com/v1/gifs/translate?api_key=KEY=${param}`, {
-    mode: "cors",
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(
-      function (response) {
-        img.src = response.data.images.original.url;
-      },
-      function rejected(err) {
-        getGif("cats");
-        errorDiv.textContent = "Error - please try another search";
-        console.log(err);
-      }
-    );
+getGif = async (param) => {
+  const response = await fetch(
+    `https://api.giphy.com/v1/gifs/translate?api_key=KEY=${param}`,
+    {
+      mode: "cors",
+    }
+  );
+  // Because .json() returns a promise, we can use await to assign the response to a variable.
+  const gifData = await response.json();
+  const gifSrc = gifData.data.images.original.url;
+  img.src = gifSrc;
 };
 
 //listeners
