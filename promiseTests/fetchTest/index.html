@@ -2,22 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Fetch test</title>
   </head>
   <body>
     <img src="#" alt="" />
-    <script>
-      const img = document.querySelector("img");
-      fetch("https://api.giphy.com/v1/gifs/translate?api_key=editado=cats", {
-        mode: "cors",
-      })
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (response) {
-          img.src = response.data.images.original.url;
-        });
-    </script>
+    <div class="errorDiv"></div>
+    <button class="moreCats">More cats!</button>
+    <section class="searchSection">
+      <label for="serach">Search GIFs: </label>
+      <input type="text" name="search" id="search" />
+      <button class="go">Go!</button>
+    </section>
   </body>
 </html>
