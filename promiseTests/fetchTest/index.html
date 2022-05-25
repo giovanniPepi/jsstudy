@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="script.js"></script>
+    <title>Fetch test</title>
+  </head>
+  <body>
+    <img src="#" alt="" />
+    <script>
+      const img = document.querySelector("img");
+      fetch("https://api.giphy.com/v1/gifs/translate?api_key=editado=cats", {
+        mode: "cors",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          img.src = response.data.images.original.url;
+        });
+    </script>
+  </body>
+</html>
